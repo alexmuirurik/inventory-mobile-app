@@ -1,9 +1,9 @@
-import HomeView from '@/src/modules/home/home.view'
 import { useState } from 'react'
+import ProductsView from '@/src/modules/products/products.view'
 
 const IndexScreen = () => {
     const [search, setSearch] = useState('')
-    return <HomeView search={search} setSearch={setSearch} />
+    return <ProductsView search={search} setSearch={setSearch} />
 }
 
 export default IndexScreen

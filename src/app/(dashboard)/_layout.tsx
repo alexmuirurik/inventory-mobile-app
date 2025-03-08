@@ -5,7 +5,7 @@ const DashboardLayout = () => {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: 'blue',
+                tabBarActiveTintColor: '#01884A',
                 tabBarInactiveTintColor: 'teal',
                 tabBarStyle: {
                     height: 60,
@@ -26,9 +26,10 @@ const DashboardLayout = () => {
                 }}
             />
             <Tabs.Screen
-                name="(products)"
+                name="products"
                 options={{
                     title: 'Products',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome
                             name="shopping-bag"

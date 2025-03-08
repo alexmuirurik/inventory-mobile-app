@@ -43,6 +43,7 @@ const DashboardLayout = () => {
                 name="cart"
                 options={{
                     title: 'Cart',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="cart-plus" size={25} color={color} />
                     ),

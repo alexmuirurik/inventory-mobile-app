@@ -17,7 +17,7 @@ const ProductsLayout = () => {
                 }}
             />
             <Stack.Screen
-                name='[category]'
+                name='categories'
                 options={{
                     headerShown: false
                 }}

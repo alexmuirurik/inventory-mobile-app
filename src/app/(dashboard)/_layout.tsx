@@ -1,0 +1,47 @@
+import { Tabs } from 'expo-router'
+import { FontAwesome } from '@expo/vector-icons'
+
+const DashboardLayout = () => {
+    return (
+        <Tabs>
+            <Tabs.Screen
+                name="index"
+                options={{
+                    title: 'Home',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name="home" size={25} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="(products)"
+                options={{
+                    title: 'Products',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name='shopping-bag' size={25} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="cart"
+                options={{
+                    title: 'Cart',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name='cart-plus' size={25} color={color} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="profile"
+                options={{
+                    title: 'Profile',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name='user-secret' size={25} color={color} />
+                    ),
+                }}
+            />
+        </Tabs>
+    )
+}
+
+export default DashboardLayout

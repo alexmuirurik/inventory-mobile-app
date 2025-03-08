@@ -1,14 +1,8 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import HomeView from '@/src/modules/home/home.view'
 
 const IndexScreen = () => {
-    return (
-        <View>
-            <Text>
-                Index 
-            </Text>
-        </View>
-    );
+    
+    return <HomeView />
 }
 
-export default IndexScreen;
+export default IndexScreen

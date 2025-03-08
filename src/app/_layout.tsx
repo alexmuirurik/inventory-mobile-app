@@ -6,10 +6,11 @@ import {
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
 import { useColorScheme } from '../hooks/useColorScheme.web'
+import { StatusBar } from 'react-native'
+import '@/src/assets/css/global.css'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -17,8 +18,8 @@ SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
     const colorScheme = useColorScheme()
     const [loaded] = useFonts({
-        spaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
         nunito: require('@/src/assets/fonts/Nunito-Regular.ttf'),
+        spaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     })
 
     useEffect(() => {
@@ -36,10 +37,12 @@ export default function RootLayout() {
             value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
         >
             <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="+not-found" />
+                <Stack.Screen
+                    name="(dashboard)"
+                    options={{ headerShown: false }}
+                />
             </Stack>
-            <StatusBar style="auto" />
+            <StatusBar barStyle="dark-content" backgroundColor={'white'} />
         </ThemeProvider>
     )
 }

@@ -3,11 +3,23 @@ import { FontAwesome } from '@expo/vector-icons'
 
 const DashboardLayout = () => {
     return (
-        <Tabs>
+        <Tabs
+            screenOptions={{
+                tabBarActiveTintColor: 'blue',
+                tabBarInactiveTintColor: 'teal',
+                tabBarStyle: {
+                    height: 60,
+                    paddingTop: 5,
+                    borderTopEndRadius: 20,
+                    borderTopStartRadius: 20,
+                },
+            }}
+        >
             <Tabs.Screen
                 name="index"
                 options={{
                     title: 'Home',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="home" size={25} color={color} />
                     ),
@@ -18,7 +30,11 @@ const DashboardLayout = () => {
                 options={{
                     title: 'Products',
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome name='shopping-bag' size={25} color={color} />
+                        <FontAwesome
+                            name="shopping-bag"
+                            size={25}
+                            color={color}
+                        />
                     ),
                 }}
             />
@@ -27,7 +43,7 @@ const DashboardLayout = () => {
                 options={{
                     title: 'Cart',
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome name='cart-plus' size={25} color={color} />
+                        <FontAwesome name="cart-plus" size={25} color={color} />
                     ),
                 }}
             />
@@ -36,7 +52,11 @@ const DashboardLayout = () => {
                 options={{
                     title: 'Profile',
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome name='user-secret' size={25} color={color} />
+                        <FontAwesome
+                            name="user-secret"
+                            size={25}
+                            color={color}
+                        />
                     ),
                 }}
             />

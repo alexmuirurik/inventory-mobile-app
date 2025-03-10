@@ -29,6 +29,9 @@ const DashboardLayout = () => {
                 name="products"
                 options={{
                     title: 'Products',
+                    href: {
+                        pathname: '/products'
+                    },
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome
@@ -37,6 +40,7 @@ const DashboardLayout = () => {
                             color={color}
                         />
                     ),
+                    
                 }}
             />
             <Tabs.Screen
@@ -53,6 +57,7 @@ const DashboardLayout = () => {
                 name="profile"
                 options={{
                     title: 'Profile',
+                    headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome
                             name="user-secret"

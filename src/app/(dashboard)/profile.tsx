@@ -1,12 +1,7 @@
-import React from 'react';
-import { View } from 'react-native';
+import ProfileView from '@/src/modules/profile/profile.view'
 
 const ProfileScreen = () => {
-    return (
-        <View>
-            
-        </View>
-    );
+    return <ProfileView />
 }
 
-export default ProfileScreen;
+export default ProfileScreen

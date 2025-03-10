@@ -1,9 +1,17 @@
 import { EvilIcons } from '@expo/vector-icons'
 import React, { Dispatch, SetStateAction } from 'react'
-import { FlatList, ScrollView, Text, TextInput, View } from 'react-native'
-import { categories, products } from '../home/home.constants'
+import {
+    FlatList,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native'
+import { categories, products } from '../../home/home.constants'
 import ProductCard from '@/src/components/cards/product.card'
 import CategoryCard from '@/src/components/cards/category.card'
+import { router } from 'expo-router'
 
 const ProductsView = ({
     search,
@@ -39,7 +47,15 @@ const ProductsView = ({
                         <Text className="text-lg font-bold">
                             Top Categories
                         </Text>
-                        <Text className="text-xs font-light">View All</Text>
+                        <TouchableOpacity
+                            onPress={() =>
+                                router.navigate({
+                                    pathname: '/products/categories',
+                                })
+                            }
+                        >
+                            <Text className="text-xs font-light">View All</Text>
+                        </TouchableOpacity>
                     </View>
                     <FlatList
                         contentContainerStyle={{
@@ -56,7 +72,6 @@ const ProductsView = ({
                 <View className="gap-4">
                     <View className="flex-row justify-between items-center">
                         <Text className="text-lg font-bold">Top Products</Text>
-                        <Text className="text-xs font-light">View All</Text>
                     </View>
                     <FlatList
                         contentContainerStyle={{

@@ -72,7 +72,16 @@ const HomeView = ({
                 <View className="gap-4">
                     <View className="flex-row justify-between items-center">
                         <Text className="text-lg font-bold">Categories</Text>
-                        <Text className="text-xs font-light">View All</Text>
+                        <TouchableOpacity
+                            onPress={() =>
+                                router.navigate({
+                                    pathname:
+                                        '/(dashboard)/products/categories',
+                                })
+                            }
+                        >
+                            <Text className="text-xs font-light">View All</Text>
+                        </TouchableOpacity>
                     </View>
                     <FlatList
                         contentContainerStyle={{
@@ -86,29 +95,36 @@ const HomeView = ({
                         horizontal
                     />
                 </View>
-                <View className="justify-center items-center border border-neutral-400 rounded-xl p-8 px-16 gap-6">
-                    <View className="flex-row items-center gap-1">
-                        <FontAwesome name="plus" size={20} />
-                        <Text className="text-2xl font-bold">Add Product</Text>
-                    </View>
-                    <Text className="text-sm font-light">
-                        Click here to add products to your catalog. We'll store
-                        your product locally for you to access anywhere
-                    </Text>
-                    <TouchableOpacity
-                        onPress={() =>
-                            router.navigate({
-                                pathname: '/(dashboard)/products/add-product',
-                            })
-                        }
-                    >
+                <TouchableOpacity
+                    onPress={() =>
+                        router.navigate({
+                            pathname: '/(dashboard)/products/add-product',
+                        })
+                    }
+                >
+                    <View className="justify-center items-center border border-teal-600 rounded-xl p-8 px-16 gap-6">
+                        <View className="flex-row items-baseline gap-1">
+                            <SimpleLineIcons
+                                name="plus"
+                                size={18}
+                                color={'#0d9488'}
+                            />
+                            <Text className="text-2xl text-teal-600 font-bold">
+                                Add Product
+                            </Text>
+                        </View>
+                        <Text className="text-sm font-light">
+                            Click here to add products to your catalog. We'll
+                            store your product locally for you to access
+                            anywhere
+                        </Text>
                         <SimpleLineIcons
                             name="plus"
                             size={50}
-                            color={'#60a5fa'}
+                            color={'#0d9488'}
                         />
-                    </TouchableOpacity>
-                </View>
+                    </View>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

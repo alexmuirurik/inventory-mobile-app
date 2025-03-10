@@ -1,8 +1,7 @@
-import React from 'react'
-import { View } from 'react-native'
+import SingleProductView from '@/src/modules/products/single-product/single-product.view'
 
 const SingleProduct = () => {
-    return <View></View>
+    return <SingleProductView />
 }
 
 export default SingleProduct

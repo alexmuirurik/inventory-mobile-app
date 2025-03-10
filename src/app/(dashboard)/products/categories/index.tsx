@@ -1,8 +1,7 @@
-import React from 'react'
-import { View } from 'react-native'
+import IndexView from '@/src/modules/categories/index/index.view'
 
 const Index = () => {
-    return <View></View>
+    return <IndexView />
 }
 
 export default Index

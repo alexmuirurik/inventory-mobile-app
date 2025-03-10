@@ -3,7 +3,7 @@ import React from 'react'
 
 const ProductsLayout = () => {
     return (
-        <Stack>
+        <Stack >
             <Stack.Screen
                 name="index"
                 options={{

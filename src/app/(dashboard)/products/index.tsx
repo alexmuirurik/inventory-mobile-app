@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ProductsView from '@/src/modules/products/products.view'
+import ProductsView from '@/src/modules/products/index/products.view'
 
 const IndexScreen = () => {
     const [search, setSearch] = useState('')

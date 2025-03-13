@@ -11,20 +11,23 @@ import {
 import { categories } from './home.constants'
 import CategoryCard from '@/src/components/cards/category.card'
 import { router } from 'expo-router'
+import { User } from '@/db/types'
 
 const HomeView = ({
+    user,
     search,
     setSearch,
 }: {
+    user: User | undefined
     search: string
     setSearch: Dispatch<SetStateAction<string>>
 }) => {
     return (
-        <ScrollView className="flex-1 p-6">
+        <ScrollView className="bg-white flex-1 p-6">
             <View className="gap-6">
                 <View>
                     <Text className="text-yellow-700 text-3xl font-bold">
-                        Hello, David
+                        Hello, {user?.firstName ?? 'Nameless'}
                     </Text>
                     <Text className="text-xs font-light">Good Afternoon</Text>
                 </View>

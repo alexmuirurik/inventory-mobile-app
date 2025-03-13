@@ -46,7 +46,7 @@ const DashboardLayout = () => {
             <Tabs.Screen
                 name="cart"
                 options={{
-                    title: 'Cart',
+                    title: 'Sales',
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="cart-plus" size={25} color={color} />

@@ -8,17 +8,18 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { categories } from './home.constants'
 import CategoryCard from '@/src/components/cards/category.card'
 import { router } from 'expo-router'
-import { User } from '@/db/types'
+import { Category, User } from '@/db/types'
 
 const HomeView = ({
     user,
+    categories,
     search,
     setSearch,
 }: {
     user: User | undefined
+    categories: Category[] | undefined
     search: string
     setSearch: Dispatch<SetStateAction<string>>
 }) => {
@@ -45,13 +46,13 @@ const HomeView = ({
                     />
                 </View>
                 <View className="flex-row justify-between items-center gap-4 flex-wrap">
-                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-8">
+                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-10">
                         <Text className="text-sm font-light">
                             Total Revenue
                         </Text>
                         <Text className="text-2xl font-bold">$43,900</Text>
                     </View>
-                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-8">
+                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-10">
                         <Text className="text-sm font-light">
                             Total Revenue
                         </Text>
@@ -59,13 +60,13 @@ const HomeView = ({
                     </View>
                 </View>
                 <View className="flex-row justify-between items-center gap-4 flex-wrap">
-                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-8">
+                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-10">
                         <Text className="text-sm font-light">
                             Total Revenue
                         </Text>
                         <Text className="text-2xl font-bold">$43,900</Text>
                     </View>
-                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-8">
+                    <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-10">
                         <Text className="text-sm font-light">
                             Total Revenue
                         </Text>
@@ -86,17 +87,19 @@ const HomeView = ({
                             <Text className="text-xs font-light">View All</Text>
                         </TouchableOpacity>
                     </View>
-                    <FlatList
-                        contentContainerStyle={{
-                            gap: 8,
-                        }}
-                        data={categories}
-                        renderItem={({ item }) => (
-                            <CategoryCard category={item} />
-                        )}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                    />
+                    {categories && (
+                        <FlatList
+                            contentContainerStyle={{
+                                gap: 8,
+                            }}
+                            data={categories}
+                            renderItem={({ item }) => (
+                                <CategoryCard category={item} />
+                            )}
+                            showsHorizontalScrollIndicator={false}
+                            horizontal
+                        />
+                    )}
                 </View>
                 <TouchableOpacity
                     onPress={() =>

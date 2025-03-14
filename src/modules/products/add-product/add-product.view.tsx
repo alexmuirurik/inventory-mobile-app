@@ -37,6 +37,7 @@ const AddProductView = () => {
                     <Text className="text-sm">Price</Text>
                     <View className="flex-row justify-between items-center gap-2">
                         <TextInput
+                            keyboardType='numeric'
                             className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
                             placeholder="Price"
                             onChangeText={(text) => console.log(text)}

@@ -10,15 +10,30 @@ const IndexScreen = () => {
     const database = useSQLiteContext()
     const drizzleDb = drizzle(database, { schema })
 
-    const { data: user, isSuccess } = useQuery({
+    const { data: user } = useQuery({
         queryKey: ['get-user'],
         queryFn: async () => {
-            const user = drizzleDb.query.users.findFirst()
+            const user = await drizzleDb.query.users.findFirst()
             return user
         },
     })
 
-    return <HomeView user={user} search={search} setSearch={setSearch} />
+    const { data: categories } = useQuery({
+        queryKey: ['get-categories'],
+        queryFn: async () => {
+            const categories = await drizzleDb.query.categories.findMany()
+            return categories
+        },
+    })
+
+    return (
+        <HomeView
+            categories={categories}
+            user={user}
+            search={search}
+            setSearch={setSearch}
+        />
+    )
 }
 
 export default IndexScreen

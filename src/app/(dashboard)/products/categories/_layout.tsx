@@ -17,6 +17,12 @@ const CategoriesLayout = () => {
                     headerShown: false,
                 }}
             />
+            <Stack.Screen
+                name="add-category"
+                options={{
+                    headerShown: false,
+                }}
+            />
         </Stack>
     )
 }

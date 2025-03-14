@@ -10,9 +10,8 @@ import { openDatabaseSync, SQLiteProvider } from 'expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import migrations from '@/drizzle/migrations'
-import { addDummyUser } from '@/db/addUser'
-import '@/src/assets/css/global.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import '@/src/assets/css/global.css'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync()
@@ -29,14 +28,10 @@ export default function RootLayout() {
     })
 
     useEffect(() => {
-        if (success) {
-            addDummyUser(db)
-        }
-
         if (loaded) {
             SplashScreen.hideAsync()
         }
-    }, [loaded, success])
+    }, [loaded])
 
     if (!loaded) {
         return null
@@ -61,6 +56,10 @@ export default function RootLayout() {
                         <Stack>
                             <Stack.Screen
                                 name="(dashboard)"
+                                options={{ headerShown: false }}
+                            />
+                            <Stack.Screen
+                                name="cart"
                                 options={{ headerShown: false }}
                             />
                         </Stack>

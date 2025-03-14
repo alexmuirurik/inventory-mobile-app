@@ -44,7 +44,7 @@ const DashboardLayout = () => {
                 }}
             />
             <Tabs.Screen
-                name="cart"
+                name="sales"
                 options={{
                     title: 'Sales',
                     headerShown: false,

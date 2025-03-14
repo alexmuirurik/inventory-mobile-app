@@ -44,33 +44,6 @@ const ProductsView = ({
                 </View>
                 <View className="gap-4">
                     <View className="flex-row justify-between items-center">
-                        <Text className="text-lg font-bold">
-                            Top Categories
-                        </Text>
-                        <TouchableOpacity
-                            onPress={() =>
-                                router.navigate({
-                                    pathname: '/products/categories',
-                                })
-                            }
-                        >
-                            <Text className="text-xs font-light">View All</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <FlatList
-                        contentContainerStyle={{
-                            gap: 8,
-                        }}
-                        data={categories}
-                        renderItem={({ item }) => (
-                            <CategoryCard category={item} />
-                        )}
-                        showsHorizontalScrollIndicator={false}
-                        horizontal
-                    />
-                </View>
-                <View className="gap-4">
-                    <View className="flex-row justify-between items-center">
                         <Text className="text-lg font-bold">Top Products</Text>
                     </View>
                     <FlatList

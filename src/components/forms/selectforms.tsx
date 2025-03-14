@@ -39,14 +39,23 @@ const SelectForms = ({
                     </View>
                 )
             }}
-            renderItem={(item, isSelected) => {
+            renderItem={(item) => {
+                const isSelected = item === selectedOne
                 return (
                     <View
                         className={`${
-                            isSelected ? 'bg-neutral-300' : 'bg-neutral-100'
+                            isSelected && 'bg-neutral-200'
                         } flex-row items-center gap-1 border border-neutral-200 p-3 w-full`}
                     >
-                        <Text>{item.name}</Text>
+                        <Text
+                            className={
+                                isSelected
+                                    ? 'text-teal-600'
+                                    : 'text-neutral-600'
+                            }
+                        >
+                            {item.name}
+                        </Text>
                     </View>
                 )
             }}

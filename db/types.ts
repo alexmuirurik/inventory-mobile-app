@@ -1,4 +1,6 @@
-import { categories, users } from "./schema";
+import { categories, users } from './schema'
+
+export * as schema from './schema'
 
 export type User = typeof users.$inferSelect
 

@@ -14,7 +14,16 @@ const IndexScreen = () => {
         queryKey: ['get-user'],
         queryFn: async () => {
             const user = await drizzleDb.query.users.findFirst()
-            return user
+            const dummy = {
+                id: 1,
+                firstName: 'Richard',
+                lastName: 'Dummy',
+                businessName: 'Dummy Business',
+                location: 'Dummy Location',
+                createdAt: '',
+            }
+
+            return user ? user : dummy
         },
     })
 
@@ -22,7 +31,7 @@ const IndexScreen = () => {
         queryKey: ['get-categories'],
         queryFn: async () => {
             const categories = await drizzleDb.query.categories.findMany()
-            return categories
+            return categories ? categories : []
         },
     })
 

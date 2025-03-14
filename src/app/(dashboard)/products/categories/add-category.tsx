@@ -1,10 +1,47 @@
-import React from 'react';
-import AddCategoryView from '@/src/modules/categories/add-category/add-category.view';
+import React from 'react'
+import AddCategoryView from '@/src/modules/categories/add-category/add-category.view'
+import { useSQLiteContext } from 'expo-sqlite'
+import { drizzle } from 'drizzle-orm/expo-sqlite'
+import { schema } from '@/db/types'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { router } from 'expo-router'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { addCategorySchema } from '@/src/modules/categories/add-category/add-category.constants'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const AddCategory = () => {
+    const queryClient = useQueryClient()
+    const database = useSQLiteContext()
+    const drizzleDb = drizzle(database, { schema: schema })
+
+    const form = useForm<z.infer<typeof addCategorySchema>>({
+        resolver: zodResolver(addCategorySchema),
+    })
+
+    const { mutate: createCategory, isPending } = useMutation({
+        mutationKey: ['create-category'],
+        mutationFn: async ({ name }: { name: string }) => {
+            const cat = await drizzleDb.insert(schema.categories).values({
+                name: name,
+            })
+            return cat
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['get-categories'] })
+            router.navigate({
+                pathname: '/(dashboard)/products/categories',
+            })
+        },
+    })
+
     return (
-        <AddCategoryView />
-    );
+        <AddCategoryView
+            createCategory={createCategory}
+            form={form}
+            isPending={isPending}
+        />
+    )
 }
 
-export default AddCategory;
+export default AddCategory

@@ -1,15 +1,32 @@
 import React from 'react'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import { ActivityIndicator, ScrollView, Text, TextInput } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
+import { Controller, UseFormReturn } from 'react-hook-form'
+import { z } from 'zod'
+import { addCategorySchema } from './add-category.constants'
 
-const AddCategoryView = () => {
+const AddCategoryView = ({
+    form,
+    createCategory,
+    isPending,
+}: {
+    form: UseFormReturn<z.infer<typeof addCategorySchema>>
+    createCategory: ({ name }: { name: string }) => any
+    isPending: boolean
+}) => {
+    const {
+        formState: {
+            errors: { name },
+        },
+        control,
+    } = form
+    const isLoading =
+        isPending ||
+        !form.formState.isValid ||
+        form.formState.isSubmitted ||
+        form.formState.isSubmitting
     return (
         <ScrollView className="bg-white flex-1 p-6">
             <View className="gap-8 pb-16">
@@ -25,20 +42,46 @@ const AddCategoryView = () => {
                         Add Category
                     </Text>
                 </View>
+                {name?.message && (
+                    <View className="bg-red-600 p-3">
+                        <Text className="text-white">{name.message}</Text>
+                    </View>
+                )}
                 <View className="gap-2">
                     <Text className="text-neutral-400 text-lg font-semibold">
                         Category Name
                     </Text>
-                    <TextInput
-                        className="border border-neutral-400 rounded-xl w-full p-3"
-                        placeholder="Category Name"
+                    <Controller
+                        name="name"
+                        control={control}
+                        rules={{ required: true }}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <TextInput
+                                className={`border ${
+                                    name?.message
+                                        ? 'border-red-400'
+                                        : 'border-neutral-400'
+                                } rounded-xl w-full p-3`}
+                                placeholder="Category Name"
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                value={value}
+                            />
+                        )}
                     />
                 </View>
                 <View className="w-fit">
-                    <TouchableOpacity className="bg-teal-600 rounded-xl py-4 px-8">
+                    <TouchableOpacity
+                        className={`${
+                            isPending ? 'bg-neutral-600' : 'bg-teal-600'
+                        } rounded-xl py-4 px-8`}
+                        onPress={form.handleSubmit(createCategory)}
+                        disabled={isLoading}
+                    >
                         <Text className="text-white text-center text-lg font-bold">
                             Create Category
                         </Text>
+                        {isLoading && <ActivityIndicator />}
                     </TouchableOpacity>
                 </View>
             </View>

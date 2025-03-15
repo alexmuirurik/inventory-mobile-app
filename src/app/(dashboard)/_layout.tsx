@@ -30,7 +30,7 @@ const DashboardLayout = () => {
                 options={{
                     title: 'Products',
                     href: {
-                        pathname: '/products'
+                        pathname: '/(dashboard)/products',
                     },
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
@@ -40,13 +40,15 @@ const DashboardLayout = () => {
                             color={color}
                         />
                     ),
-                    
                 }}
             />
             <Tabs.Screen
                 name="sales"
                 options={{
                     title: 'Sales',
+                    href: {
+                        pathname: '/(dashboard)/sales',
+                    },
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
                         <FontAwesome name="cart-plus" size={25} color={color} />

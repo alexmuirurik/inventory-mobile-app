@@ -7,10 +7,10 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { products } from '../home/home.constants'
+import { products } from '../../home/home.constants'
 import CheckoutCard from '@/src/components/cards/checkout.card'
 
-const CartView = () => {
+const SaleView = () => {
     return (
         <ScrollView className="bg-white flex-1 p-6">
             <View className="gap-8 mb-10">
@@ -59,4 +59,4 @@ const CartView = () => {
     )
 }
 
-export default CartView
+export default SaleView

@@ -61,10 +61,6 @@ export default function RootLayout() {
                                 name="(dashboard)"
                                 options={{ headerShown: false }}
                             />
-                            <Stack.Screen
-                                name="cart"
-                                options={{ headerShown: false }}
-                            />
                         </Stack>
                         <StatusBar
                             barStyle="dark-content"

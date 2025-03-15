@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
 export const addProductSchema = z.object({
-    id: z.number(),
     name: z.string(),
-    price: z.number(),
-    stock: z.number(),
+    price: z.number().min(1),
+    stock: z.number().min(1),
     image: z.string(),
+    description: z.string(),
     status: z.string(),
-    categoryId: z.number()
+    categoryId: z.number(),
 })

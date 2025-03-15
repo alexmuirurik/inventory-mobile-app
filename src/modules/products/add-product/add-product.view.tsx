@@ -1,7 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons'
 import React, { useState } from 'react'
 import { Controller, UseFormReturn } from 'react-hook-form'
-import { ScrollView, Text, TextInput } from 'react-native'
+import { ActivityIndicator, ScrollView, Text, TextInput } from 'react-native'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { z } from 'zod'
 import * as ImagePicker from 'expo-image-picker'
@@ -10,46 +10,60 @@ import SelectForms from '@/src/components/forms/selectforms'
 import { Category } from '@/db/types'
 
 const AddProductView = ({
+    isPending,
+    addProduct,
     categories,
     form,
 }: {
+    isPending: boolean
+    addProduct: (data: z.infer<typeof addProductSchema>) => any
     categories: Category[] | undefined
     form: UseFormReturn<z.infer<typeof addProductSchema>>
 }) => {
     const [image, setImage] = useState<string | null>(null)
     const { control, formState } = form
+    const isLoading = formState.isSubmitting || isPending
 
     const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images', 'videos'],
-            allowsEditing: true,
+            mediaTypes: ['images'],
+            allowsEditing: false,
             aspect: [4, 3],
             quality: 1,
         })
 
-        console.log(result)
-
         if (!result.canceled) {
+            form.setValue('image', result.assets[0].uri)
             setImage(result.assets[0].uri)
         }
     }
+
     return (
         <ScrollView className="bg-white flex-1 p-6">
             <View className="gap-6 pb-12">
-                <TouchableOpacity
-                    className="justify-center items-center gap-4 "
-                    onPress={pickImage}
-                >
-                    <View className="justify-center items-center border border-neutral-300 rounded-xl p-8 w-full h-52">
-                        <FontAwesome name="image" size={80} />
-                    </View>
+                <View className="justify-center items-center gap-4 ">
+                    <TouchableOpacity
+                        className="justify-center items-center border border-neutral-300 rounded-xl w-full aspect-video overflow-hidden"
+                        onPress={pickImage}
+                    >
+                        {form.getValues('image') ? (
+                            <Image
+                                className="w-full aspect-video"
+                                src={form.getValues('image')}
+                            />
+                        ) : (
+                            <View className=" p-8">
+                                <FontAwesome name="image" size={80} />
+                            </View>
+                        )}
+                    </TouchableOpacity>
                     <View className="flex-row justify-between items-center gap-2">
                         <Text className="text-2xl text-yellow-700 font-bold">
-                            Add Product Image
+                            {form.getValues('image') ? 'Change' : 'Add'} Product
+                            Image
                         </Text>
                     </View>
-                </TouchableOpacity>
+                </View>
                 <View className="gap-2">
                     <Text className="text-sm">Product Name</Text>
                     <View className="flex-row justify-between items-center gap-2">
@@ -76,32 +90,33 @@ const AddProductView = ({
                         <Controller
                             name="price"
                             control={control}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
+                            render={() => (
                                 <TextInput
                                     keyboardType="number-pad"
                                     className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
                                     placeholder="Price"
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={String(value ?? 0)}
+                                    onChangeText={(text) =>
+                                        form.setValue('price', Number(text))
+                                    }
                                 />
                             )}
                         />
+                    </View>
+                </View>
+                <View className="gap-2">
+                    <Text className="text-sm">Stock</Text>
+                    <View className="flex-row justify-between items-center gap-2">
                         <Controller
-                            name="price"
+                            name="stock"
                             control={control}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
+                            render={() => (
                                 <TextInput
                                     className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
                                     placeholder="Units"
                                     keyboardType="number-pad"
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={String(value ?? 0)}
+                                    onChangeText={(text) =>
+                                        form.setValue('stock', Number(text))
+                                    }
                                 />
                             )}
                         />
@@ -113,9 +128,7 @@ const AddProductView = ({
                         <Controller
                             name="categoryId"
                             control={control}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
+                            render={() => (
                                 <SelectForms
                                     form={form}
                                     categories={categories}
@@ -129,7 +142,7 @@ const AddProductView = ({
                     <Text className="text-sm">Description</Text>
                     <View className="flex-row justify-between items-center gap-2">
                         <Controller
-                            name="status"
+                            name="description"
                             control={control}
                             render={({
                                 field: { onChange, onBlur, value },
@@ -151,10 +164,15 @@ const AddProductView = ({
                     </View>
                 </View>
                 <View className="gap-2 justify-self-end">
-                    <TouchableOpacity className="bg-teal-600 hover:bg-teal-400 rounded-xl p-4 w-full">
+                    <TouchableOpacity
+                        className="bg-teal-600 hover:bg-teal-400 flex-row items-center justify-center gap-2 rounded-xl p-4 w-full"
+                        onPress={form.handleSubmit(addProduct)}
+                        disabled={isLoading}
+                    >
                         <Text className="text-center text-white text-xl font-bold">
                             Add Product
                         </Text>
+                        {isLoading && <ActivityIndicator size={'large'} />}
                     </TouchableOpacity>
                 </View>
             </View>

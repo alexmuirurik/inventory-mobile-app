@@ -1,7 +1,27 @@
+import { schema } from '@/db/types'
 import SingleProductView from '@/src/modules/products/single-product/single-product.view'
+import { useQuery } from '@tanstack/react-query'
+import { eq } from 'drizzle-orm'
+import { drizzle } from 'drizzle-orm/expo-sqlite'
+import { useLocalSearchParams } from 'expo-router'
+import { useSQLiteContext } from 'expo-sqlite'
 
 const SingleProduct = () => {
-    return <SingleProductView />
+    const { product } = useLocalSearchParams()
+    const database = useSQLiteContext()
+    const drizzleDb = drizzle(database, { schema: schema })
+
+    const { data: singleProduct, isLoading } = useQuery({
+        queryKey: ['get-product', product],
+        queryFn: async () => {
+            const prod = await drizzleDb.query.products.findFirst({
+                where: eq(schema.products.id, Number(product as string)),
+            })
+            return prod
+        },
+    })
+
+    return <SingleProductView isLoading={isLoading} product={singleProduct} />
 }
 
 export default SingleProduct

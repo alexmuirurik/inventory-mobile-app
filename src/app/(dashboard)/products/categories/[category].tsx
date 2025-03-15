@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CategoryView from '@/src/modules/categories/category/category.view'
 import { useLocalSearchParams } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
@@ -8,9 +8,10 @@ import * as schema from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
 const Category = () => {
+    const { category } = useLocalSearchParams()
+    const [search, setSearch] = useState('')
     const database = useSQLiteContext()
     const drizzleDb = drizzle(database, { schema })
-    const { category } = useLocalSearchParams()
 
     const { data: categor } = useQuery({
         queryKey: ['get-categories', category],
@@ -22,7 +23,28 @@ const Category = () => {
         },
     })
 
-    return <CategoryView category={categor} />
+    const { data: products, isLoading } = useQuery({
+        queryKey: ['get-products', category],
+        queryFn: async () => {
+            const prods = await drizzleDb.query.products.findMany({
+                where: eq(
+                    schema.products.categoryId,
+                    Number(category as string)
+                ),
+            })
+            return prods ? prods : []
+        },
+    })
+
+    return (
+        <CategoryView
+            search={search}
+            setSearch={setSearch}
+            products={products}
+            isLoading={isLoading}
+            category={categor}
+        />
+    )
 }
 
 export default Category

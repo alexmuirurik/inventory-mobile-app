@@ -1,4 +1,9 @@
-import { EvilIcons, FontAwesome, SimpleLineIcons } from '@expo/vector-icons'
+import {
+    EvilIcons,
+    FontAwesome,
+    Ionicons,
+    SimpleLineIcons,
+} from '@expo/vector-icons'
 import { Dispatch, SetStateAction } from 'react'
 import {
     FlatList,
@@ -39,11 +44,19 @@ const HomeView = ({
                         placeholder="Search Products"
                         value={search}
                     />
-                    <EvilIcons
-                        name="search"
-                        className="font-light border border-neutral-500 rounded-lg p-3"
-                        size={25}
-                    />
+                    <TouchableOpacity
+                        onPress={() =>
+                            router.navigate({
+                                pathname: '/(dashboard)/products/add-product',
+                            })
+                        }
+                    >
+                        <Ionicons
+                            name="scan-outline"
+                            className="font-light border border-neutral-500 rounded-lg p-2"
+                            size={25}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View className="flex-row justify-between items-center gap-4 flex-wrap">
                     <View className="flex-1 justify-center items-center border border-neutral-500 rounded-2xl p-10">
@@ -96,6 +109,7 @@ const HomeView = ({
                             renderItem={({ item }) => (
                                 <CategoryCard category={item} />
                             )}
+                            scrollEnabled={false}
                             showsHorizontalScrollIndicator={false}
                             horizontal
                         />
@@ -110,11 +124,6 @@ const HomeView = ({
                 >
                     <View className="justify-center items-center border border-teal-600 rounded-xl p-8 px-16 gap-6">
                         <View className="flex-row items-baseline gap-1">
-                            <SimpleLineIcons
-                                name="plus"
-                                size={18}
-                                color={'#0d9488'}
-                            />
                             <Text className="text-2xl text-teal-600 font-bold">
                                 Add Product
                             </Text>

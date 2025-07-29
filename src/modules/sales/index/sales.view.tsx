@@ -1,11 +1,16 @@
 import React from 'react'
-import { FlatList, Text } from 'react-native'
+import { ActivityIndicator, FlatList, Text } from 'react-native'
 import { ScrollView, View } from 'react-native'
-import { products } from '../../home/home.constants'
-import CheckoutCard from '@/src/components/cards/checkout.card'
-import { TouchableOpacity } from 'react-native'
+import { Sale } from '@/db/types'
+import SalesCard from '@/src/components/cards/sales-card'
 
-const SalesView = () => {
+const SalesView = ({
+    isLoading,
+    sales,
+}: {
+    isLoading: boolean
+    sales: Sale[] | undefined
+}) => {
     return (
         <ScrollView className="bg-white flex-1 p-6">
             <View className="gap-8 mb-10">
@@ -15,15 +20,23 @@ const SalesView = () => {
                     </Text>
                     <Text className="text-xs font-light">Good Afternoon</Text>
                 </View>
-                <FlatList
-                    contentContainerStyle={{
-                        gap: 8,
-                    }}
-                    data={products}
-                    renderItem={({ item }) => <CheckoutCard product={item} />}
-                    showsVerticalScrollIndicator={false}
-                    scrollEnabled={false}
-                />
+                <View className="gap-4">
+                    {isLoading && (
+                        <ActivityIndicator
+                            className="text-teal-600"
+                            size={'large'}
+                        />
+                    )}
+                    <FlatList
+                        contentContainerStyle={{
+                            gap: 8,
+                        }}
+                        data={sales}
+                        renderItem={({ item }) => <SalesCard sale={item} />}
+                        showsVerticalScrollIndicator={false}
+                        scrollEnabled={false}
+                    />
+                </View>
             </View>
         </ScrollView>
     )

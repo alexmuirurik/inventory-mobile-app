@@ -34,6 +34,9 @@ const AddProduct = () => {
                 pathname: '/(dashboard)/products'
             })
         },
+        onError: (err) => {
+            console.log(err)
+        }
     })
 
     const form = useForm<z.infer<typeof addProductSchema>>({

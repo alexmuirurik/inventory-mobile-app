@@ -6,7 +6,6 @@ export const addCategorySchema = z.object({
 
 export const addProductSchema = z.object({
     name: z.string(),
-    userId: z.number(),
     price: z.number().min(1),
     stock: z.number().min(1),
     image: z.string(),

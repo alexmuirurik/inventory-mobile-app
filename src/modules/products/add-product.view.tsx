@@ -39,142 +39,139 @@ const AddProductView = ({
     }
 
     return (
-        <ScrollView className="bg-white flex-1 p-6 mt-6">
-            <View className="gap-6 pb-12">
-                <View className="justify-center items-center gap-4 ">
-                    <TouchableOpacity
-                        className="justify-center items-center border border-neutral-300 rounded-xl w-full aspect-video overflow-hidden"
-                        onPress={pickImage}
-                    >
-                        {form.getValues('image') ? (
-                            <Image
-                                className="w-full aspect-video"
-                                src={form.getValues('image')}
+        <ScrollView
+            className="bg-white flex-1 p-6 mt-6"
+            contentContainerStyle={{ gap: 24, paddingBottom: 48 }}
+        >
+            <View className="flex-row justify-between items-center gap-2">
+                <Text className="text-2xl text-yellow-700 font-bold">
+                    {form.getValues('image') ? 'Edit' : 'Add'} Product
+                </Text>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm text-start">Product Image</Text>
+                <TouchableOpacity
+                    className="justify-center items-center border border-neutral-300 rounded-xl w-full aspect-video overflow-hidden"
+                    onPress={pickImage}
+                >
+                    {form.getValues('image') ? (
+                        <Image
+                            className="w-full aspect-video"
+                            src={form.getValues('image')}
+                        />
+                    ) : (
+                        <View className=" p-8">
+                            <FontAwesome name="image" size={80} />
+                        </View>
+                    )}
+                </TouchableOpacity>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm">Product Name</Text>
+                <View className="flex-row justify-between items-center gap-2">
+                    <Controller
+                        name="name"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <TextInput
+                                className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
+                                placeholder="Business Name"
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                value={value}
                             />
-                        ) : (
-                            <View className=" p-8">
-                                <FontAwesome name="image" size={80} />
-                            </View>
                         )}
-                    </TouchableOpacity>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Text className="text-2xl text-yellow-700 font-bold">
-                            {form.getValues('image') ? 'Change' : 'Add'} Product
-                            Image
-                        </Text>
-                    </View>
+                    />
                 </View>
-                <View className="gap-2">
-                    <Text className="text-sm">Product Name</Text>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Controller
-                            name="name"
-                            control={control}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
-                                <TextInput
-                                    className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
-                                    placeholder="Business Name"
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            )}
-                        />
-                    </View>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm">Price</Text>
+                <View className="flex-row justify-between items-center gap-2">
+                    <Controller
+                        name="price"
+                        control={control}
+                        render={() => (
+                            <TextInput
+                                keyboardType="number-pad"
+                                className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
+                                placeholder="Price"
+                                onChangeText={(text) =>
+                                    form.setValue('price', Number(text))
+                                }
+                            />
+                        )}
+                    />
                 </View>
-                <View className="gap-2">
-                    <Text className="text-sm">Price</Text>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Controller
-                            name="price"
-                            control={control}
-                            render={() => (
-                                <TextInput
-                                    keyboardType="number-pad"
-                                    className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
-                                    placeholder="Price"
-                                    onChangeText={(text) =>
-                                        form.setValue('price', Number(text))
-                                    }
-                                />
-                            )}
-                        />
-                    </View>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm">Stock</Text>
+                <View className="flex-row justify-between items-center gap-2">
+                    <Controller
+                        name="stock"
+                        control={control}
+                        render={() => (
+                            <TextInput
+                                className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
+                                placeholder="Units"
+                                keyboardType="number-pad"
+                                onChangeText={(text) =>
+                                    form.setValue('stock', Number(text))
+                                }
+                            />
+                        )}
+                    />
                 </View>
-                <View className="gap-2">
-                    <Text className="text-sm">Stock</Text>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Controller
-                            name="stock"
-                            control={control}
-                            render={() => (
-                                <TextInput
-                                    className="flex-grow flex-shrink border border-neutral-300 rounded-xl max-w-full p-4"
-                                    placeholder="Units"
-                                    keyboardType="number-pad"
-                                    onChangeText={(text) =>
-                                        form.setValue('stock', Number(text))
-                                    }
-                                />
-                            )}
-                        />
-                    </View>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm">Category</Text>
+                <View className="flex-row justify-between items-center gap-2">
+                    <Controller
+                        name="categoryId"
+                        control={control}
+                        render={() => (
+                            <SelectForms
+                                form={form}
+                                categories={categories}
+                                title="Select a Category"
+                            />
+                        )}
+                    />
                 </View>
-                <View className="gap-2">
-                    <Text className="text-sm">Category</Text>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Controller
-                            name="categoryId"
-                            control={control}
-                            render={() => (
-                                <SelectForms
-                                    form={form}
-                                    categories={categories}
-                                    title="Select a Category"
-                                />
-                            )}
-                        />
-                    </View>
+            </View>
+            <View className="gap-2">
+                <Text className="text-sm">Description</Text>
+                <View className="flex-row justify-between items-center gap-2">
+                    <Controller
+                        name="description"
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <TextInput
+                                className="flex-grow flex-shrink text-start border border-neutral-300 rounded-xl max-w-full h-52 leading-5 p-4"
+                                style={{
+                                    textAlignVertical: 'top',
+                                }}
+                                placeholder="Description"
+                                numberOfLines={16}
+                                multiline
+                                onChangeText={onChange}
+                                onBlur={onBlur}
+                                value={value}
+                            />
+                        )}
+                    />
                 </View>
-                <View className="gap-2">
-                    <Text className="text-sm">Description</Text>
-                    <View className="flex-row justify-between items-center gap-2">
-                        <Controller
-                            name="description"
-                            control={control}
-                            render={({
-                                field: { onChange, onBlur, value },
-                            }) => (
-                                <TextInput
-                                    className="flex-grow flex-shrink text-start border border-neutral-300 rounded-xl max-w-full h-52 leading-5 p-4"
-                                    style={{
-                                        textAlignVertical: 'top',
-                                    }}
-                                    placeholder="Description"
-                                    numberOfLines={16}
-                                    multiline
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            )}
-                        />
-                    </View>
-                </View>
-                <View className="gap-2 justify-self-end">
-                    <TouchableOpacity
-                        className="bg-teal-600 hover:bg-teal-400 flex-row items-center justify-center gap-2 rounded-xl p-4 w-full"
-                        onPress={form.handleSubmit(addProduct)}
-                        disabled={isLoading}
-                    >
-                        <Text className="text-center text-white text-xl font-bold">
-                            Add Product
-                        </Text>
-                        {isLoading && <ActivityIndicator size={'large'} />}
-                    </TouchableOpacity>
-                </View>
+            </View>
+            <View className="gap-2 justify-self-end">
+                <TouchableOpacity
+                    className="bg-teal-600 hover:bg-teal-400 flex-row items-center justify-center gap-2 rounded-xl p-4 w-full"
+                    onPress={form.handleSubmit(addProduct)}
+                    disabled={isLoading}
+                >
+                    <Text className="text-center text-white text-xl font-bold">
+                        Add Product
+                    </Text>
+                    {isLoading && <ActivityIndicator size={'large'} />}
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

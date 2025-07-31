@@ -12,27 +12,24 @@ const SingleProductView = ({
     isLoading: boolean
     product: Product | undefined
 }) => {
-    const addToCart = () => {
-        
-    }
+    const addToCart = () => {}
+
     return (
-        <ScrollView className="bg-white flex-1 p-6">
+        <ScrollView
+            className="bg-white flex-1 p-6 mt-6"
+            contentContainerStyle={{
+                gap: 32,
+                paddingBottom: 12,
+            }}
+        >
             {!product ? (
                 <ActivityIndicator
                     className="flex-row justify-center items-center"
                     size={'large'}
                 />
             ) : (
-                <View className="gap-4 pb-12">
+                <View className="gap-8 pb-12">
                     <View className="flex-row justify-between items-center gap-4">
-                        <TouchableOpacity onPress={() => router.back()}>
-                            <Entypo
-                                size={35}
-                                name="chevron-with-circle-left"
-                                color={'#a3a3a3'}
-                            />
-                        </TouchableOpacity>
-
                         <Text className="text-yellow-700 text-3xl font-bold">
                             {product.name.slice(0, 20)}
                         </Text>
@@ -73,8 +70,16 @@ const SingleProductView = ({
                             {product?.stock?.toLocaleString()} Items
                         </Text>
                     </View>
-                    <View>
-                        <TouchableOpacity className="bg-green-700 rounded-xl p-4 w-full">
+                    <View className="flex-row gap-2 w-full">
+                        <TouchableOpacity
+                            className="border border-green-700 rounded-xl p-4 w-1/2 "
+                            onPress={() => router.back()}
+                        >
+                            <Text className="text-center text-black font-bold">
+                                Back
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity className="bg-green-700 rounded-xl p-4 w-1/2">
                             <Text className="text-center text-white font-bold">
                                 Add to Cart
                             </Text>

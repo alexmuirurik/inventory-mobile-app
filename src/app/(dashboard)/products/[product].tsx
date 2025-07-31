@@ -1,6 +1,6 @@
 import { schema } from '@/db/types'
 import SingleProductView from '@/src/modules/products/single-product/single-product.view'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useLocalSearchParams } from 'expo-router'
@@ -19,6 +19,13 @@ const SingleProduct = () => {
             })
             return prod
         },
+    })
+
+    const {mutateAsync: addToCart} = useMutation({
+        mutationKey: [''],
+        mutationFn: async (productId: string) => {
+                     
+        }
     })
 
     return <SingleProductView isLoading={isLoading} product={singleProduct} />

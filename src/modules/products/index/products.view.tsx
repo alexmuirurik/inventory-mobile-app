@@ -29,6 +29,12 @@ const ProductsView = ({
             pathname: '/(dashboard)/products/add-product',
         })
     }
+
+    const createCategory = () => {
+        router.navigate({
+            pathname: '/(dashboard)/products/categories/add-category',
+        })
+    }
     return (
         <View className="relative flex-1">
             <TouchableOpacity
@@ -43,7 +49,11 @@ const ProductsView = ({
                         <Text className="text-yellow-700 text-3xl font-bold">
                             Products List
                         </Text>
-                        <Text className="text-xs font-light">Showing All</Text>
+                        <TouchableOpacity onPress={createCategory}>
+                            <Text className="text-xs font-light">
+                                Add Category
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                     <View className="flex-row justify-between items-center gap-2 w-full ">
                         <TextInput

@@ -12,12 +12,14 @@ export const users = sqliteTable('users', {
 
 export const categories = sqliteTable('categories', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    userId: integer('userId').notNull().references(() => users.id),
     name: text('name').notNull(),
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })
 
 export const products = sqliteTable('products', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    userId: integer('userId').notNull().references(() => users.id),
     name: text('name').notNull(),
     price: real('price').notNull(),
     stock: real('stock').notNull().default(0),
@@ -30,9 +32,20 @@ export const products = sqliteTable('products', {
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })
 
+export const checkoutItems = sqliteTable('checkoutItems', {
+    id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    userId: integer('userId').notNull().references(() => users.id),
+    saleId: integer('saleId').notNull().references(() => sales.id),
+    productId: integer('productId').notNull().references(() => products.id),
+    noOfItems: integer('noOfItems').notNull().default(0),
+    totalAmount: real('totalAmount').notNull().default(0),
+    status: text('status').notNull().default('incomplete'),
+    createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
+})
+
 export const sales = sqliteTable('sales', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    products: text({ mode: 'json' }),
-    status: text('status').notNull().default('incomplete'),
+    userId: integer('userId').notNull().references(() => users.id),
+    status: text('status').notNull().default('pending'),
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })

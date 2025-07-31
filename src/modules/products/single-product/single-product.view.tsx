@@ -12,6 +12,9 @@ const SingleProductView = ({
     isLoading: boolean
     product: Product | undefined
 }) => {
+    const addToCart = () => {
+        
+    }
     return (
         <ScrollView className="bg-white flex-1 p-6">
             {!product ? (
@@ -55,19 +58,23 @@ const SingleProductView = ({
                             DESCRIPTION
                         </Text>
                         <Text className="text-neutral-400" selectable>
-                            {product?.description}   
+                            {product?.description}
                         </Text>
                     </View>
                     <View className="gap-4">
                         <Text className="text-lg font-semibold">PRICE</Text>
-                        <Text className="text-neutral-400">{product.price.toLocaleString()} Ksh</Text>
+                        <Text className="text-neutral-400">
+                            {product.price.toLocaleString()} Ksh
+                        </Text>
                     </View>
                     <View className="gap-4">
                         <Text className="text-lg font-semibold">STOCK</Text>
-                        <Text className="text-neutral-400">{product?.stock?.toLocaleString()} Items</Text>
+                        <Text className="text-neutral-400">
+                            {product?.stock?.toLocaleString()} Items
+                        </Text>
                     </View>
                     <View>
-                        <TouchableOpacity className="bg-blue-600 rounded-xl p-4 w-full">
+                        <TouchableOpacity className="bg-green-700 rounded-xl p-4 w-full">
                             <Text className="text-center text-white font-bold">
                                 Add to Cart
                             </Text>

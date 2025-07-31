@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { EvilIcons, Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { Category, Product } from '@/db/types'
 import ProductCard from '@/src/components/cards/product.card'

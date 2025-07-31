@@ -19,7 +19,7 @@ const SalesView = ({
 }) => {
     const checkoutCart = () => {}
     return (
-        <View className="relative flex-1 h-screen w-screen">
+        <View className="relative flex-1 h-screen w-screen mt-6">
             <TouchableOpacity
                 className="bg-green-900 items-center justify-center absolute h-16 w-16 p-2 bottom-3 right-3 rounded-full z-50"
                 onPress={checkoutCart}

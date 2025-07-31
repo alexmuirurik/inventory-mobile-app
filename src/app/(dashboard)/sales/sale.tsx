@@ -1,4 +1,4 @@
-import SaleView from '@/src/modules/sales/sale/sale.view'
+import SaleView from "@/src/modules/sales/sale.view"
 
 const Sale = () => {
     return <SaleView />

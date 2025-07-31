@@ -5,8 +5,8 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import ProfileView from '@/src/modules/profile/profile.view'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { updateProfileSchema } from '@/src/modules/profile/profile.constants'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { updateProfileSchema } from '@/db/schemas'
 
 const ProfileScreen = () => {
     const database = useSQLiteContext()

@@ -5,9 +5,9 @@ import { ActivityIndicator, ScrollView, Text, TextInput } from 'react-native'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { z } from 'zod'
 import * as ImagePicker from 'expo-image-picker'
-import { addProductSchema } from './add-product.constants'
 import SelectForms from '@/src/components/forms/selectforms'
 import { Category } from '@/db/types'
+import { addProductSchema } from '@/db/schemas'
 
 const AddProductView = ({
     isPending,
@@ -39,7 +39,7 @@ const AddProductView = ({
     }
 
     return (
-        <ScrollView className="bg-white flex-1 p-6">
+        <ScrollView className="bg-white flex-1 p-6 mt-6">
             <View className="gap-6 pb-12">
                 <View className="justify-center items-center gap-4 ">
                     <TouchableOpacity

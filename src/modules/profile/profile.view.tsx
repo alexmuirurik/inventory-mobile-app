@@ -1,3 +1,4 @@
+import { updateProfileSchema } from '@/db/schemas'
 import { User } from '@/db/types'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import {
@@ -9,7 +10,6 @@ import {
     View,
 } from 'react-native'
 import { z } from 'zod'
-import { updateProfileSchema } from './profile.constants'
 
 const ProfileView = ({
     isPending,

@@ -74,14 +74,14 @@ const AddCategoryView = ({
                     <TouchableOpacity
                         className={`${
                             isPending ? 'bg-neutral-600' : 'bg-teal-600'
-                        } rounded-xl py-4 px-8`}
+                        } flex-row gap-2 rounded-xl py-4 px-8`}
                         onPress={form.handleSubmit(createCategory)}
                         disabled={isLoading}
                     >
+                        {isLoading && <ActivityIndicator color={'white'} />}
                         <Text className="text-white text-center text-lg font-bold">
                             Create Category
                         </Text>
-                        {isLoading && <ActivityIndicator />}
                     </TouchableOpacity>
                 </View>
             </View>

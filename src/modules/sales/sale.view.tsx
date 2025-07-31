@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
-import { products } from '../../home/home.constants'
 import CheckoutCard from '@/src/components/cards/checkout.card'
 
 const SaleView = () => {
@@ -20,15 +19,7 @@ const SaleView = () => {
                     </Text>
                     <Text className="text-xs font-light">Good Afternoon</Text>
                 </View>
-                <FlatList
-                    contentContainerStyle={{
-                        gap: 8,
-                    }}
-                    data={products}
-                    renderItem={({ item }) => <CheckoutCard product={item} />}
-                    showsVerticalScrollIndicator={false}
-                    scrollEnabled={false}
-                />
+                
                 <View className="gap-3">
                     <View className="flex-row justify-between items-center">
                         <Text className="font-semibold">

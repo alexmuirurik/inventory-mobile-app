@@ -22,7 +22,6 @@ const AddCategory = () => {
         mutationKey: ['create-category'],
         mutationFn: async ({ name }: { name: string }) => {
             const cat = await drizzleDb.insert(schema.categories).values({
-                userId: 1,
                 name: name,
             })
             return cat

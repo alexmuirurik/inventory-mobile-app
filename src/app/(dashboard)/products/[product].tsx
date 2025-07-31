@@ -1,5 +1,5 @@
 import { schema } from '@/db/types'
-import SingleProductView from '@/src/modules/products/single-product/single-product.view'
+import SingleProductView from '@/src/modules/products/single-product.view'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/expo-sqlite'

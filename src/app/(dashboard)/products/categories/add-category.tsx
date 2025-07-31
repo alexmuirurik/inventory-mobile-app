@@ -1,5 +1,4 @@
-import React from 'react'
-import AddCategoryView from '@/src/modules/categories/add-category/add-category.view'
+import AddCategoryView from '@/src/modules/categories/add-category.view'
 import { useSQLiteContext } from 'expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { schema } from '@/db/types'
@@ -7,8 +6,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { addCategorySchema } from '@/src/modules/categories/add-category/add-category.constants'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { addCategorySchema } from '@/db/schemas'
 
 const AddCategory = () => {
     const queryClient = useQueryClient()
@@ -23,6 +22,7 @@ const AddCategory = () => {
         mutationKey: ['create-category'],
         mutationFn: async ({ name }: { name: string }) => {
             const cat = await drizzleDb.insert(schema.categories).values({
+                userId: 1,
                 name: name,
             })
             return cat

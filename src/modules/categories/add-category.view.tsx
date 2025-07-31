@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
-import { addCategorySchema } from './add-category.constants'
+import { addCategorySchema } from '@/db/schemas'
 
 const AddCategoryView = ({
     form,
@@ -28,7 +28,7 @@ const AddCategoryView = ({
         form.formState.isSubmitted ||
         form.formState.isSubmitting
     return (
-        <ScrollView className="bg-white flex-1 p-6">
+        <ScrollView className="bg-white flex-1 p-6 mt-6">
             <View className="gap-8 pb-16">
                 <View className="flex-row items-center gap-16 ">
                     <TouchableOpacity onPress={() => router.back()}>

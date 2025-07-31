@@ -36,7 +36,7 @@ const ProductsView = ({
         })
     }
     return (
-        <View className="relative flex-1">
+        <View className="relative flex-1 mt-6">
             <TouchableOpacity
                 className="bg-green-900 items-center justify-center absolute h-16 w-16 bottom-3 right-3 rounded-full z-50"
                 onPress={createProduct}

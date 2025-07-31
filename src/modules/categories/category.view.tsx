@@ -27,7 +27,7 @@ const CategoryView = ({
     category: Category | undefined
 }) => {
     return (
-        <ScrollView className="bg-white flex-1 p-6">
+        <ScrollView className="bg-white flex-1 p-6 mt-6">
             <View className="gap-4 pb-12">
                 <View>
                     <Text className="text-yellow-700 text-3xl font-bold">

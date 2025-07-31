@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import CategoryView from '@/src/modules/categories/category/category.view'
+import CategoryView from '@/src/modules/categories/category.view'
 import { useLocalSearchParams } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
 import { drizzle } from 'drizzle-orm/expo-sqlite'

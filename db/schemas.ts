@@ -1,4 +1,8 @@
-import { z } from 'zod'
+import { z } from "zod";
+
+export const addCategorySchema = z.object({
+    name: z.string()
+})
 
 export const addProductSchema = z.object({
     name: z.string(),

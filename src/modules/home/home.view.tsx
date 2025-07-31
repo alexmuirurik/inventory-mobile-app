@@ -1,25 +1,17 @@
-import {
-    EvilIcons,
-    FontAwesome,
-    Ionicons,
-    SimpleLineIcons,
-} from '@expo/vector-icons'
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { Dispatch, SetStateAction } from 'react'
 import {
-    FlatList,
     ScrollView,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from 'react-native'
-import CategoryCard from '@/src/components/cards/category.card'
 import { router } from 'expo-router'
 import { Category, User } from '@/db/types'
 
 const HomeView = ({
     user,
-    categories,
     search,
     setSearch,
 }: {
@@ -30,7 +22,7 @@ const HomeView = ({
 }) => {
     return (
         <ScrollView
-            className="bg-white flex-1 p-6"
+            className="bg-white flex-1 p-6 mt-6"
             contentContainerStyle={{ marginBottom: 560, gap: 16 }}
         >
             <View>

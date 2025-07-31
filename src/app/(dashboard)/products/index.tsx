@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import ProductsView from '@/src/modules/products/index/products.view'
+import ProductsView from '@/src/modules/products/products.view'
 import { useQuery } from '@tanstack/react-query'
 import { useSQLiteContext } from 'expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'

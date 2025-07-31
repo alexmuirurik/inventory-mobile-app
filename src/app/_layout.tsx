@@ -65,7 +65,6 @@ export default function RootLayout() {
                         <StatusBar
                             barStyle="dark-content"
                             backgroundColor={'white'}
-                            
                         />
                     </SQLiteProvider>
                 </QueryClientProvider>

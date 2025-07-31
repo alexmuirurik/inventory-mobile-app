@@ -1,5 +1,5 @@
 import { schema } from '@/db/types'
-import SalesView from '@/src/modules/sales/index/sales.view'
+import SalesView from '@/src/modules/sales/sales.view'
 import { useQuery } from '@tanstack/react-query'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite'

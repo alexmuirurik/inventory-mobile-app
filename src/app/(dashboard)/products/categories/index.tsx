@@ -1,4 +1,4 @@
-import IndexView from '@/src/modules/categories/index/index.view'
+import IndexView from '@/src/modules/categories/index.view'
 import { useQuery } from '@tanstack/react-query'
 import * as schema from '@/db/schema'
 import { drizzle } from 'drizzle-orm/expo-sqlite'

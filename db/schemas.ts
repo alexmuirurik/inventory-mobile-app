@@ -20,3 +20,9 @@ export const updateProfileSchema = z.object({
     businessName: z.string(),
     location: z.string(),
 })
+
+export const addToCartSchema = z.object({
+    productId: z.number(),
+    noOfItems: z.number(),
+    totalAmout: z.number(),
+})

@@ -10,10 +10,15 @@ const SalesScreen = () => {
     const { isFetching, data: sales } = useQuery({
         queryKey: ['get-sales'],
         queryFn: async () => {
-            const sales = await drizzleDb.query.sales.findMany()
-            return sales ? sales : []
+            try {
+                const sales = await drizzleDb.query.sales.findMany()
+                return Promise.resolve(sales ? sales : [])
+            } catch (error) {
+                return Promise.reject(error)
+            }
         },
     })
+    
     return <SalesView isLoading={isFetching} sales={sales} />
 }
 

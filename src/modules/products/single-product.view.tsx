@@ -1,19 +1,24 @@
 import { Entypo, FontAwesome } from '@expo/vector-icons'
-import React from 'react'
+import React, { useState } from 'react'
 import { ActivityIndicator, Image, Text, TouchableOpacity } from 'react-native'
 import { ScrollView, View } from 'react-native'
 import { router } from 'expo-router'
-import { Product } from '@/db/types'
+import { CheckoutItem, Product } from '@/db/types'
+import z from 'zod'
+import { addToCartSchema } from '@/db/schemas'
 
 const SingleProductView = ({
     isLoading,
     product,
+    checkoutItems,
+    addToCart,
 }: {
     isLoading: boolean
     product: Product | undefined
+    checkoutItems: CheckoutItem[] | undefined
+    addToCart: (data: z.infer<typeof addToCartSchema>) => void
 }) => {
-    const addToCart = () => {}
-
+    const [dialogOpen, setDialogOpen] = useState()
     return (
         <ScrollView
             className="bg-white flex-1 p-6 mt-6"

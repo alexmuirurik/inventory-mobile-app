@@ -2,7 +2,7 @@ import { DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useMemo } from 'react'
 import 'react-native-reanimated'
 import { useColorScheme } from '../hooks/useColorScheme.web'
 import { ActivityIndicator, StatusBar } from 'react-native'
@@ -20,8 +20,7 @@ export default function RootLayout() {
     const myDB = openDatabaseSync('inventory')
     const db = drizzle(myDB)
     const { success } = useMigrations(db, migrations)
-
-    const colorScheme = useColorScheme()
+    const queryClient = useMemo(() => new QueryClient(), [])
     const [loaded] = useFonts({
         nunito: require('@/src/assets/fonts/Nunito-Regular.ttf'),
         spaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -50,7 +49,7 @@ export default function RootLayout() {
                     />
                 }
             >
-                <QueryClientProvider client={new QueryClient()}>
+                <QueryClientProvider client={queryClient}>
                     <SQLiteProvider
                         databaseName="inventory"
                         options={{ enableChangeListener: true }}

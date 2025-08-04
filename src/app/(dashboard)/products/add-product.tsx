@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import * as schema from '@/db/zodSchemas'
+import * as schema from '@/db/schema'
 import { useSQLiteContext } from 'expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'

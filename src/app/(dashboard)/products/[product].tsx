@@ -1,7 +1,7 @@
 import { addToCartSchema } from '@/db/zod-schemas'
 import { schema } from '@/db/types'
 import SingleProductView from '@/src/modules/products/single-product.view'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { and, eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useLocalSearchParams } from 'expo-router'
@@ -12,35 +12,7 @@ const SingleProduct = () => {
     const { product } = useLocalSearchParams()
     const database = useSQLiteContext()
     const drizzleDb = drizzle(database, { schema: schema })
-
-    const { data: sale, isFetching: isSaleFetching } = useQuery({
-        queryKey: ['get-pending-sale'],
-        queryFn: async () => {
-            try {
-                const sale = await drizzleDb.query.sales.findFirst({
-                    where: eq(schema.sales.status, 'pending'),
-                })
-                return Promise.resolve(sale)
-            } catch (error) {
-                return Promise.reject(error)
-            }
-        },
-    })
-
-    const { data: checkoutItems, isFetching: isCheckoutFetching } = useQuery({
-        queryKey: ['get-pending-sale-checkout-item'],
-        queryFn: async () => {
-            try {
-                const checkoutItems =
-                    await drizzleDb.query.checkoutItems.findMany({
-                        where: eq(schema.checkoutItems.saleId, sale?.id ?? -1),
-                    })
-                return Promise.resolve(checkoutItems)
-            } catch (error) {
-                return Promise.reject(error)
-            }
-        },
-    })
+    const queryClient = useQueryClient()
 
     const { data: singleProduct, isFetching } = useQuery({
         queryKey: ['get-product', product],
@@ -56,49 +28,54 @@ const SingleProduct = () => {
         },
     })
 
-    const { mutateAsync: addToCart } = useMutation({
-        mutationKey: ['add-to-cart-mutate'],
-        mutationFn: async (data: z.infer<typeof addToCartSchema>) => {
+    const { data: checkoutItems, isFetching: isCheckoutFetching } = useQuery({
+        queryKey: ['get-pending-sale-checkout-item'],
+        queryFn: async () => {
             try {
-                const sale = await drizzleDb.query.sales.findFirst({
-                    where: eq(schema.sales.status, 'pending'),
-                })
-                const checkoutItem = checkoutItems?.find(
-                    (checkoutItem) =>
-                        checkoutItem.productId === Number(product as string)
-                )
-                if (sale && checkoutItem) {
-                    const updateCheckoutItem = await drizzleDb
-                        .update(schema.checkoutItems)
-                        .set({
-                            id: checkoutItem.id,
-                            noOfItems: data.noOfItems,
-                            totalAmount: data.totalAmout,
-                        })
-                    return Promise.resolve(updateCheckoutItem)
-                }
-
-                if (sale && !checkoutItem) {
-                    const checkoutItem = await drizzleDb
-                        .insert(schema.checkoutItems)
-                        .values({
-                            saleId: sale.id,
-                            productId: data.productId,
-                            noOfItems: data.noOfItems,
-                            totalAmount: data.totalAmout,
-                            status: 'added',
-                        })
-                    return Promise.resolve(checkoutItem)
-                }
+                const cartItems = await drizzleDb.query.checkoutItems.findMany()
+                return Promise.resolve(cartItems)
             } catch (error) {
                 return Promise.reject(error)
             }
         },
     })
 
+    const { mutateAsync: addToCart, isPending: isCartPending } = useMutation({
+        mutationKey: ['add-to-cart-mutate'],
+        mutationFn: async (data: z.infer<typeof addToCartSchema>) => {
+            try {
+                const cartItem = await drizzleDb.query.checkoutitems.findFirst({
+                    where: eq(schema.checkoutitems.productId, data.productId),
+                })
+
+                if (cartItem) {
+                    const updateCartItem = await drizzleDb
+                        .update(schema.checkoutItems)
+                        .set({
+                            id: cartItem.id,
+                            noOfItems: data.noOfItems,
+                            totalAmount: data.totalAmout,
+                        })
+                    return Promise.resolve(updateCartItem)
+                }
+
+                const createCartItem = await drizzleDb
+                    .insert(schema.checkoutitems)
+                    .values(data)
+
+                return Promise.resolve(cartItem)
+            } catch (error) {
+                return Promise.reject(error)
+            }
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries()
+        }
+    })
+
     return (
         <SingleProductView
-            isLoading={isFetching}
+            isLoading={isFetching || isCheckoutFetching || isCartPending}
             product={singleProduct}
             addToCart={addToCart}
             checkoutItems={checkoutItems}

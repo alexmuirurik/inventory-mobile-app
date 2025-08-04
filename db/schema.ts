@@ -30,8 +30,16 @@ export const products = sqliteTable('products', {
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })
 
-export const checkoutItems = sqliteTable('checkoutItems', {
+export const carts = sqliteTable('carts', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
+})
+
+export const cartItems = sqliteTable('cartItems', {
+    id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    cartId: integer('cartId')
+        .notNull()
+        .references(() => carts.id),
     productId: integer('productId')
         .notNull()
         .references(() => products.id),
@@ -45,5 +53,19 @@ export const sales = sqliteTable('sales', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
     status: text('status').notNull().default('pending'),
     sales: text('sales', { mode: 'json' }),
+    createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
+})
+
+export const salesItems = sqliteTable('cartItems', {
+    id: integer('id').notNull().primaryKey({ autoIncrement: true }),
+    salesId: integer('salesId')
+        .notNull()
+        .references(() => sales.id),
+    productId: integer('productId')
+        .notNull()
+        .references(() => products.id),
+    noOfItems: integer('noOfItems').notNull().default(0),
+    totalAmount: real('totalAmount').notNull().default(0),
+    status: text('status').notNull().default('incomplete'),
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })

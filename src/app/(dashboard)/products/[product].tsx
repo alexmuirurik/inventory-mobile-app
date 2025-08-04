@@ -1,4 +1,4 @@
-import { addToCartSchema } from '@/db/schemas'
+import { addToCartSchema } from '@/db/zod-schemas'
 import { schema } from '@/db/types'
 import SingleProductView from '@/src/modules/products/single-product.view'
 import { useMutation, useQuery } from '@tanstack/react-query'

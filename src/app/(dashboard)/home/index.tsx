@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite'
-import * as schema from '@/db/schema'
+import * as schema from '@/db/zodSchemas'
 import { useQuery } from '@tanstack/react-query'
 import HomeView from '@/src/modules/home/home.view'
 

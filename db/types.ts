@@ -1,6 +1,6 @@
-import { categories, checkoutItems, products, sales, users } from './schema'
+import { categories, checkoutItems, products, sales, users } from './zodSchemas'
 
-export * as schema from './schema'
+export * as schema from './zodSchemas'
 
 export type User = typeof users.$inferSelect
 

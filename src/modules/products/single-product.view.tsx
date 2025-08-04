@@ -5,7 +5,7 @@ import { ScrollView, View } from 'react-native'
 import { router } from 'expo-router'
 import { CheckoutItem, Product } from '@/db/types'
 import z from 'zod'
-import { addToCartSchema } from '@/db/schemas'
+import { addToCartSchema } from '@/db/zod-schemas'
 
 const SingleProductView = ({
     isLoading,

@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import * as schema from '@/db/schema'
+import * as schema from '@/db/zodSchemas'
 import { useSQLiteContext } from 'expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { router } from 'expo-router'
-import { addProductSchema } from '@/db/schemas'
+import { addProductSchema } from '@/db/zod-schemas'
 import AddProductView from '@/src/modules/products/add-product.view'
 
 const AddProduct = () => {

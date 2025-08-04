@@ -32,9 +32,6 @@ export const products = sqliteTable('products', {
 
 export const checkoutItems = sqliteTable('checkoutItems', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    saleId: integer('saleId')
-        .notNull()
-        .references(() => sales.id),
     productId: integer('productId')
         .notNull()
         .references(() => products.id),
@@ -47,5 +44,6 @@ export const checkoutItems = sqliteTable('checkoutItems', {
 export const sales = sqliteTable('sales', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
     status: text('status').notNull().default('pending'),
+    sales: text('sales', { mode: 'json' }),
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })

@@ -7,7 +7,7 @@ import { router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { addCategorySchema } from '@/db/schemas'
+import { addCategorySchema } from '@/db/zod-schemas'
 
 const AddCategory = () => {
     const queryClient = useQueryClient()

@@ -1,12 +1,12 @@
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite'
-import * as schema from '@/db/schema'
+import * as schema from '@/db/zodSchemas'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import ProfileView from '@/src/modules/profile/profile.view'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { updateProfileSchema } from '@/db/schemas'
+import { updateProfileSchema } from '@/db/zod-schemas'
 
 const ProfileScreen = () => {
     const database = useSQLiteContext()

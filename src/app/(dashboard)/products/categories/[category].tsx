@@ -4,7 +4,7 @@ import { useLocalSearchParams } from 'expo-router'
 import { useQuery } from '@tanstack/react-query'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite'
-import * as schema from '@/db/schema'
+import * as schema from '@/db/zodSchemas'
 import { eq } from 'drizzle-orm'
 
 const Category = () => {

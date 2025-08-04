@@ -1,4 +1,4 @@
-import { updateProfileSchema } from '@/db/schemas'
+import { updateProfileSchema } from '@/db/zod-schemas'
 import { User } from '@/db/types'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import {

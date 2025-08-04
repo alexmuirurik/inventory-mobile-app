@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { Controller, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
-import { addCategorySchema } from '@/db/schemas'
+import { addCategorySchema } from '@/db/zod-schemas'
 
 const AddCategoryView = ({
     form,

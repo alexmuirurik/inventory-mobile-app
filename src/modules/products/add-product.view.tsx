@@ -7,7 +7,7 @@ import { z } from 'zod'
 import * as ImagePicker from 'expo-image-picker'
 import SelectForms from '@/src/components/forms/selectforms'
 import { Category } from '@/db/types'
-import { addProductSchema } from '@/db/schemas'
+import { addProductSchema } from '@/db/zod-schemas'
 
 const AddProductView = ({
     isPending,

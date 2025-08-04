@@ -1,12 +1,10 @@
 CREATE TABLE `cartItems` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-	`salesId` integer NOT NULL,
 	`productId` integer NOT NULL,
 	`noOfItems` integer DEFAULT 0 NOT NULL,
 	`totalAmount` real DEFAULT 0 NOT NULL,
 	`status` text DEFAULT 'incomplete' NOT NULL,
 	`createdAt` text DEFAULT (CURRENT_TIMESTAMP),
-	FOREIGN KEY (`salesId`) REFERENCES `sales`(`id`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint

@@ -50,9 +50,6 @@ export const sales = sqliteTable('sales', {
 
 export const salesItems = sqliteTable('cartItems', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    salesId: integer('salesId')
-        .notNull()
-        .references(() => sales.id),
     productId: integer('productId')
         .notNull()
         .references(() => products.id),

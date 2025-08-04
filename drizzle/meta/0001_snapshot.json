@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "7a58a337-d30e-4744-8c9c-50ae336ca845",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "27790e84-7603-412d-9b3f-705be0469592",
+  "prevId": "7a58a337-d30e-4744-8c9c-50ae336ca845",
   "tables": {
     "cartItems": {
       "name": "cartItems",
@@ -13,13 +13,6 @@
           "primaryKey": true,
           "notNull": true,
           "autoincrement": true
-        },
-        "salesId": {
-          "name": "salesId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
         },
         "productId": {
           "name": "productId",
@@ -63,19 +56,6 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "cartItems_salesId_sales_id_fk": {
-          "name": "cartItems_salesId_sales_id_fk",
-          "tableFrom": "cartItems",
-          "tableTo": "sales",
-          "columnsFrom": [
-            "salesId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
         "cartItems_productId_products_id_fk": {
           "name": "cartItems_productId_products_id_fk",
           "tableFrom": "cartItems",

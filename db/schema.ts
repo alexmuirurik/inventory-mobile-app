@@ -30,16 +30,8 @@ export const products = sqliteTable('products', {
     createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
 })
 
-export const carts = sqliteTable('carts', {
-    id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    createdAt: text('createdAt').default(sql`(CURRENT_TIMESTAMP)`),
-})
-
 export const cartItems = sqliteTable('cartItems', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    cartId: integer('cartId')
-        .notNull()
-        .references(() => carts.id),
     productId: integer('productId')
         .notNull()
         .references(() => products.id),
@@ -58,9 +50,6 @@ export const sales = sqliteTable('sales', {
 
 export const salesItems = sqliteTable('cartItems', {
     id: integer('id').notNull().primaryKey({ autoIncrement: true }),
-    salesId: integer('salesId')
-        .notNull()
-        .references(() => sales.id),
     productId: integer('productId')
         .notNull()
         .references(() => products.id),

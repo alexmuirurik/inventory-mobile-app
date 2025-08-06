@@ -1,6 +1,6 @@
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite'
-import * as schema from '@/db/zodSchemas'
+import * as schema from '@/db/schema'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import ProfileView from '@/src/modules/profile/profile.view'
 import { useForm } from 'react-hook-form'

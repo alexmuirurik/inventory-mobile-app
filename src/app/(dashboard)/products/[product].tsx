@@ -32,7 +32,7 @@ const SingleProduct = () => {
         queryKey: ['get-pending-sale-checkout-item'],
         queryFn: async () => {
             try {
-                const cartItems = await drizzleDb.query.checkoutItems.findMany()
+                const cartItems = await drizzleDb.query.cartItems.findMany()
                 return Promise.resolve(cartItems)
             } catch (error) {
                 return Promise.reject(error)
@@ -44,13 +44,13 @@ const SingleProduct = () => {
         mutationKey: ['add-to-cart-mutate'],
         mutationFn: async (data: z.infer<typeof addToCartSchema>) => {
             try {
-                const cartItem = await drizzleDb.query.checkoutitems.findFirst({
-                    where: eq(schema.checkoutitems.productId, data.productId),
+                const cartItem = await drizzleDb.query.cartItems.findFirst({
+                    where: eq(schema.cartItems.productId, data.productId),
                 })
 
                 if (cartItem) {
                     const updateCartItem = await drizzleDb
-                        .update(schema.checkoutItems)
+                        .update(schema.cartItems)
                         .set({
                             id: cartItem.id,
                             noOfItems: data.noOfItems,
@@ -60,17 +60,19 @@ const SingleProduct = () => {
                 }
 
                 const createCartItem = await drizzleDb
-                    .insert(schema.checkoutitems)
+                    .insert(schema.cartItems)
                     .values(data)
+                console.log(createCartItem)
 
-                return Promise.resolve(cartItem)
+                return Promise.resolve(createCartItem)
             } catch (error) {
+                console.log(error)
                 return Promise.reject(error)
             }
         },
         onSuccess: async () => {
             await queryClient.invalidateQueries()
-        }
+        },
     })
 
     return (

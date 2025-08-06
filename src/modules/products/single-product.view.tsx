@@ -84,9 +84,25 @@ const SingleProductView = ({
                                 Back
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity className="bg-green-700 rounded-xl p-4 w-1/2">
+                        <TouchableOpacity
+                            className="bg-green-700 flex-row items-center gap-1 rounded-xl p-4 w-1/2"
+                            onPress={() => {
+                                const count = checkoutItems?.length ?? 0
+                                if (product) {
+                                    addToCart({
+                                        productId: product.id as number,
+                                        totalAmout: count + 1 * product.price,
+                                        noOfItems: count + 1,
+                                    })
+                                }
+                            }}
+                        >
+                            {isLoading && <ActivityIndicator color={'white'} />}
                             <Text className="text-center text-white font-bold">
                                 Add to Cart
+                            </Text>
+                            <Text className="text-xs text-neutral-300">
+                                {checkoutItems?.length} Items
                             </Text>
                         </TouchableOpacity>
                     </View>

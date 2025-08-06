@@ -1,50 +1,44 @@
-# Welcome to your Expo app 👋
+The Inventory Mobile App is a cross-platform mobile application built with Expo that enables users to manage stock, track inventory levels, and update product data offline using a local SQLite database. The project demonstrates how to build robust mobile applications with local-first architecture, modular components, and a focus on performance and usability. 
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Tech Stack
 
-## Get started
+React Native (Expo) · TypeScript · SQLite · Drizzle ORM · React Hook Form · Tailwind CSS (via NativeWind)
 
-1. Install dependencies
+## Key Features
 
-   ```bash
-   npm install
-   ```
+- ✅ Offline-first architecture using SQLite for local data storage
+- ⚙️ Drizzle ORM integration for querying and schema management
+- 📦 Inventory management features: add, update, delete stock items
+- 🎨 Clean and responsive UI built with NativeWind (Tailwind for React Native)
+- 📋 Form validation with React Hook Form + Zod
+- 🔄 Sync-ready structure (prepares local data for future cloud sync integration)
 
-2. Start the app
+## My Role & Contributions
 
-   ```bash
-    npx expo start
-   ```
+### UI/UX Design 
 
-In the output, you'll find options to open the app in a
+Designed the mobile app’s layout and navigation based on mockups created in Figma, ensuring a seamless and intuitive user experience.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### Local Data Layer
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Integrated SQLite with Drizzle ORM for efficient local storage and schema-safe queries.
 
-## Get a fresh project
+### Cross-platform Development
 
-When you're ready, run:
+Built and tested on both Android and iOS using Expo, ensuring consistent behavior across devices.
 
-```bash
-npm run reset-project
-```
+### Research & Architecture
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Explored and documented architectural patterns for local-first apps, and evaluated alternative state and data management strategies.
 
-## Learn more
+### Web Compatibility
 
-To learn more about developing your project with Expo, look at the following resources:
+Aligned the mobile app structure with a corresponding web admin panel, enabling seamless data interaction and a consistent user model across platforms.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Use Cases
 
-## Join the community
+This app is ideal for:
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Small businesses needing an offline inventory tracking tool
+- Field agents or warehouse managers without reliable internet access
+- Developers seeking a template for offline-first mobile apps

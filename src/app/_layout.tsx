@@ -1,21 +1,29 @@
-import { useColorScheme } from "@/src/hooks/use-color-scheme"
 import { Stack } from "expo-router"
-import { StatusBar } from "expo-status-bar"
+import { StatusBar } from "react-native"
 import "react-native-reanimated"
 
 export const unstable_settings = { anchor: "index" }
 
 const RootLayout = () => {
-    const colorScheme = useColorScheme()
-
     return (
         <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen
+                name="index"
+                options={{
+                    headerShown: false,
+                    contentStyle: {
+                        paddingTop: 10,
+                    },
+                }}
+            />
             <Stack.Screen
                 name="modal"
-                options={{ presentation: "modal", title: "Modal" }}
+                options={{
+                    presentation: "modal",
+                    title: "Modal",
+                }}
             />
-            <StatusBar style='dark' />
+            <StatusBar barStyle="dark-content" />
         </Stack>
     )
 }

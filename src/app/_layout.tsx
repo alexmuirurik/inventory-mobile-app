@@ -13,6 +13,7 @@ const RootLayout = () => {
                     headerShown: false,
                     contentStyle: {
                         paddingTop: 10,
+                        paddingBottom: 10,
                     },
                 }}
             />
